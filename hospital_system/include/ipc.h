@@ -4,13 +4,14 @@
 #include <time.h>
 #include <pthread.h>
 #include <semaphore.h>
+#include "config.h" // <--- ESTA LINHA CORRIGE O ERRO
 
 // --- Message Queues Keys & Types ---
 #define MQ_KEY_URGENT 'U'
 #define MQ_KEY_NORMAL 'N'
 #define MQ_KEY_RESP   'R'
 
-// Tipos de Mensagem [cite: 579-597]
+// Tipos de Mensagem
 #define MSG_NEW_EMERGENCY     1
 #define MSG_NEW_APPOINTMENT   2
 #define MSG_NEW_SURGERY       3
@@ -35,7 +36,7 @@ typedef struct {
 
 // --- Shared Memory Structures ---
 
-// SHM1: Global Statistics [cite: 605-641]
+// SHM1: Global Statistics
 typedef struct {
     pthread_mutex_t mutex;
     pthread_mutexattr_t mutex_attr;
@@ -83,7 +84,7 @@ typedef struct {
     int simulation_time_units;
 } global_statistics_t;
 
-// SHM2: Surgery Block Status [cite: 643-650]
+// SHM2: Surgery Block Status
 typedef struct {
     int room_id;
     int status; // 0=FREE, 1=OCCUPIED, 2=CLEANING
@@ -99,7 +100,7 @@ typedef struct {
     pthread_mutex_t teams_mutex;
 } surgery_block_shm_t;
 
-// SHM3: Pharmacy Stock [cite: 654-666]
+// SHM3: Pharmacy Stock
 typedef struct {
     char name[30];
     int current_stock;
@@ -115,7 +116,7 @@ typedef struct {
     pthread_mutex_t global_mutex;
 } pharmacy_shm_t;
 
-// SHM4: Lab Queues [cite: 668-687]
+// SHM4: Lab Queues
 typedef struct {
     char request_id[20];
     char patient_id[15];
@@ -137,7 +138,7 @@ typedef struct {
     pthread_mutex_t lab2_mutex;
 } lab_queue_shm_t;
 
-// SHM5: Critical Log [cite: 691-703]
+// SHM5: Critical Log
 typedef struct {
     time_t timestamp;
     char event_type[30];

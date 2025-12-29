@@ -1,6 +1,6 @@
-# Makefile conforme especificação 10.2
+# Makefile
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -pthread -D_REENTRANT -g -O2 -Iinclude
+CFLAGS = -Wall -Wextra -Werror -pthread -D_REENTRANT -D_XOPEN_SOURCE=700 -g -O2 -Iinclude
 LDFLAGS = -pthread -lrt
 
 # Lista de Objetos
